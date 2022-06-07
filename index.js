@@ -29,7 +29,9 @@ function addElement(num) {
     const new_item = document.createElement("div");
     new_item.className = "grid-item";
     // 0 is empty, 1 is start, 2 is end, 3 is blocked
-    if (grid_vals[i]) {
+    if (grid_vals[i] == 3) {
+      new_item.className = "grid-item hidden";
+    } else if (grid_vals[i]) {
       new_item.innerHTML = grid_options[grid_vals[i]];
     }
     grid.appendChild(new_item);
@@ -72,6 +74,8 @@ document.getElementById("randomize").onclick = function randomizeList() {
   grid_vals[end] = 2;
   deleteChildren(grid);
   addElement(len);
+  grid.children[start].style.backgroundColor = "#1fdbcc";
+  grid.children[end].style.backgroundColor = "#1fdbcc";
 }
 
 document.getElementById("start").onclick = async function beginBFS() {
@@ -85,7 +89,7 @@ document.getElementById("start").onclick = async function beginBFS() {
   while (queue.length > 0) {
     await sleep(50);
     let current = queue.pop();
-    grid.children[current].style.backgroundColor = "yellow";
+    grid.children[current].style.backgroundColor = "#ffea00";
     find_neighbors(current);
     if (path.length > 1) {
       let last = path[path.length-1];
@@ -103,7 +107,7 @@ document.getElementById("start").onclick = async function beginBFS() {
   if (reached_end) {
     for (let i=0;i<path.length;i++) {
       await sleep(10);
-      grid.children[path[i]].style.backgroundColor = "green";
+      grid.children[path[i]].style.backgroundColor = "#25e628";
     }
   } else {
     console.log("no solution");
