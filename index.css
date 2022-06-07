@@ -71,3 +71,7 @@ button:active {
   position: absolute;
   color: #efefef;
 }
+
+.hidden {
+  opacity: 0%;
+}
